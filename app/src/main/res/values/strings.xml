@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">SPS KING</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="score">SCORE</string>
+    <string name="newgame">NEW GAME</string>
+    <string name="Resume">RESUME</string>
+    <string name="profile">PROFILE</string>
+    <string name="name">ENTER NAME</string>
+    <string name="age">ENTER AGE</string>
+    <string name="submit">SUBMIT</string>
+    <string name="image">Image</string>
+    <string name="upload">UPLOAD</string>
+    <string name="single">GO SOLO</string>
+    <string name="multi">V/S MODE</string>
+    <string name="round">SELECT ROUNDS</string>
+    <string name="Five">ROUND I</string>
+    <string name="ten">ROUND II</string>
+    <string name="fifte">ROUND III</string>
+    <string name="select_mode">SELECT MODE</string>
+    <string name="minimum_password">Password too short, enter minimum 6 characters!</string>
+    <string name="auth_failed">Authentication failed, check your email and password or sign up</string>
+</resources>
