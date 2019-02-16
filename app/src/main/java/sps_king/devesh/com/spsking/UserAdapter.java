@@ -45,6 +45,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ImageViewHolde
             holder.textViewName.setText(workersdatabase.getName());
             holder.request.setText("Create Room");
 
+            position=position+1;
             holder.number.setText(String.valueOf(position));
 
             Picasso.with(mContext).load(workersdatabase.getImage()).fit().centerCrop().into(holder.image);

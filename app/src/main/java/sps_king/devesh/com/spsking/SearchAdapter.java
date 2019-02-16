@@ -60,8 +60,9 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ImageViewH
     public void onBindViewHolder(final SearchAdapter.ImageViewHolder holder, int position) {
         final UserDatabase workersdatabase = mUploads.get(position);
         holder.textViewName.setText(workersdatabase.getName());
-        // holder.number.setText(++i);
-        //i++;
+        position=position+1;
+        holder.number.setText(String.valueOf(position));
+
         Picasso.with(mContext).load(workersdatabase.getImage()).fit().centerCrop().into(holder.image);
 
 

@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +31,7 @@ public class Room_Activity extends Activity {
     private DatabaseReference rootRef, demoRef;
     private DatabaseReference rootRef1, demoRef1,mdata;
     private Handler handler = new Handler();
-    private Button b1,b2,b3;
+    private ImageButton b1,b2,b3;
     private int Round=1;
     private int x=0;
     private int y=0;
@@ -59,9 +60,9 @@ public class Room_Activity extends Activity {
         setContentView(R.layout.activity_room_);
 
 
-        b1=(Button)findViewById(R.id.btn_12);
-        b2=(Button)findViewById(R.id.btn_23);
-        b3=(Button)findViewById(R.id.btn_34);
+        b1=(ImageButton) findViewById(R.id.btn_12);
+        b2=(ImageButton) findViewById(R.id.btn_23);
+        b3=(ImageButton) findViewById(R.id.btn_34);
 
         t1=(TextView)findViewById(R.id.tv_wincr);
         t2=(TextView)findViewById(R.id.tv_loosecr);

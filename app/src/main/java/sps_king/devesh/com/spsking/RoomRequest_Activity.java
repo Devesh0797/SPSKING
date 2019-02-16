@@ -16,6 +16,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import pl.droidsonroids.gif.GifImageView;
+
 public class RoomRequest_Activity extends AppCompatActivity {
     private DatabaseReference rootRef,demoRef;
     private Handler handler= new Handler();
@@ -25,6 +27,7 @@ public class RoomRequest_Activity extends AppCompatActivity {
     private Button b1,b2;
     private TextView t1;
     private CardView c1;
+    private GifImageView gif;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +36,7 @@ public class RoomRequest_Activity extends AppCompatActivity {
 
         b1=(Button)findViewById(R.id.btn_accept);
         b2=(Button)findViewById(R.id.btn_reject);
-
+        gif=(GifImageView)findViewById(R.id.gif_se);
         t1=(TextView)findViewById(R.id.tv_pla98);
 
         c1=(CardView)findViewById(R.id.cv_player);
@@ -100,6 +103,7 @@ public class RoomRequest_Activity extends AppCompatActivity {
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             String name = dataSnapshot.getValue(String.class);
 
+                            gif.setVisibility(View.GONE);
                             t1.setText(name+" Wants To connect.");
                             c1.setVisibility(View.VISIBLE);
                             b1.setOnClickListener(new View.OnClickListener() {

@@ -29,6 +29,7 @@ public class Search_Activity extends Activity {
     private SearchAdapter mAdapter;
     private DatabaseReference mDatabaseRef;
     private List<UserDatabase> mUploads;
+    private ProgressBar mProgressCircle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,15 +46,15 @@ public class Search_Activity extends Activity {
         // mProgressCircle = rootView.findViewById(R.id.pro);
 
         mUploads = new ArrayList<>();
-      //  mProgressCircle = (ProgressBar) findViewById(R.id.progressBar56);
+        mProgressCircle = (ProgressBar) findViewById(R.id.pro_search);
 
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("Users");
 
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String pin = e1.getText().toString().trim();
-               // mProgressCircle.setVisibility(View.VISIBLE);
+                final String pin = e1.getText().toString().trim();
+                mProgressCircle.setVisibility(View.VISIBLE);
 
                 Query query = mDatabaseRef.orderByChild("name").equalTo(pin);
 
@@ -63,11 +64,15 @@ public class Search_Activity extends Activity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                             UserDatabase workersdatabase = postSnapshot.getValue(UserDatabase.class);
+
                             if (workersdatabase.getUserID().equals(New_Game.USerID)) {
 
                             }
                             else {
-                                mUploads.add(workersdatabase);
+                                String a = workersdatabase.getName().toLowerCase();
+                                if(a.equals(pin)) {
+                                    mUploads.add(workersdatabase);
+                                }
                             }
 
                         }
@@ -78,7 +83,7 @@ public class Search_Activity extends Activity {
                         mAdapter = new SearchAdapter(Search_Activity.this, mUploads);
 
                         mRecyclerView.setAdapter(mAdapter);
-                       // mProgressCircle.setVisibility(View.INVISIBLE);
+                        mProgressCircle.setVisibility(View.INVISIBLE);
 
 
 
@@ -87,6 +92,8 @@ public class Search_Activity extends Activity {
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
                         Toast.makeText(Search_Activity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                        mProgressCircle.setVisibility(View.INVISIBLE);
+
 
                     }
                 });

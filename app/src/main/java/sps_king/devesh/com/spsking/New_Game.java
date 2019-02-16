@@ -69,6 +69,7 @@ public class New_Game extends Activity {
 
 
 
+
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

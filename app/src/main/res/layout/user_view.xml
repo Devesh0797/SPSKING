@@ -4,6 +4,7 @@
     android:id="@+id/card_123"
     android:layout_width="match_parent"
     android:layout_height="80dp"
+    android:background="@color/colorPrimaryDark"
     android:layout_margin="8dp">
 
     <RelativeLayout
@@ -83,7 +84,11 @@
             android:layout_marginEnd="6dp"
             android:layout_marginRight="6dp"
             android:layout_toEndOf="@+id/textView67"
-            android:text="Send Request" />
+            android:background="@color/colorPrimary"
+            android:text="Send Request"
+            android:textAllCaps="true"
+            android:textColor="@android:color/holo_blue_bright"
+            android:textStyle="bold|italic" />
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>

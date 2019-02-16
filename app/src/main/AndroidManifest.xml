@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="sps_king.devesh.com.spsking"
+
     android:installLocation="preferExternal">
+
 
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -13,36 +15,63 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RoomRequest_Activity"></activity>
-        <activity android:name=".SplashActivity">
+        <activity android:name=".RoomRequest_Activity"
+            android:screenOrientation="portrait">>
+
+        </activity>
+        <activity android:name=".SplashActivity"
+            android:screenOrientation="portrait">>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Splash2Activity" />
-        <activity android:name=".New_Game" />
-        <activity android:name=".Userlist_Activity" />
-        <activity android:name=".Room_Activity" />
-        <activity android:name=".About_us" />
-        <activity android:name=".DetailsActivity" />
-        <activity android:name=".Final2UserResult" />
-        <activity android:name=".Gameoptions" />
-        <activity android:name=".OpponentName" />
-        <activity android:name=".Profile" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".result" />
-        <activity android:name=".Room2Activity" />
-        <activity android:name=".Rules" />
-        <activity android:name=".Single" />
-        <activity android:name=".Time_out" />
-        <activity android:name=".Twoplayer" />
-        <activity android:name=".TwoUserResult" />
-        <activity android:name=".Multiplayer" />
-        <activity android:name=".Search_Activity" />
-        <activity android:name=".Friend_requestActivity" />
-        <activity android:name=".RoundActivity" />
+        <activity android:name=".Splash2Activity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".New_Game"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Userlist_Activity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Room_Activity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".About_us"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".DetailsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Final2UserResult"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Gameoptions"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".OpponentName"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Profile"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".RegisterActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".result"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Room2Activity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Rules"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Single"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Time_out"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Twoplayer"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".TwoUserResult"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Multiplayer"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Search_Activity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|adjustResize"/>
+        <activity android:name=".Friend_requestActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".RoundActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

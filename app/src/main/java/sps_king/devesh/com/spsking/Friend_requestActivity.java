@@ -18,7 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Friend_requestActivity extends Activity {
+public class Friend_requestActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private RequestAdapter mAdapter;
