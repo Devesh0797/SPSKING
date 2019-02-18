@@ -1,6 +1,7 @@
 package sps_king.devesh.com.spsking;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ public class RoomRequest_Activity extends AppCompatActivity {
     private TextView t1;
     private CardView c1;
     private GifImageView gif;
+    private int a=0,b=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,36 +112,25 @@ public class RoomRequest_Activity extends AppCompatActivity {
                                 @Override
                                 public void onClick(View v) {
                                     New_Game.player="player2";
+                                    a=1;
                                     startActivity(new Intent(RoomRequest_Activity.this,Room2Activity.class));
+                                    finish();
                                 }
                             });
                             b2.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-
+                                    a=1;
                                 }
                             });
-
-
-
                         }
-
-
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
                             Toast.makeText(RoomRequest_Activity.this, "Check your Internet Connection", Toast.LENGTH_SHORT).show();
                             finish();
                         }
                     });
-
-
-
-
-
-
                 }
-
-
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
                     Toast.makeText(RoomRequest_Activity.this, "Check your Internet Connection", Toast.LENGTH_SHORT).show();
@@ -151,5 +142,45 @@ public class RoomRequest_Activity extends AppCompatActivity {
 
         }
     };
+
+    @Override
+    public void onBackPressed() {
+        a=1;
+        startActivity(new Intent(RoomRequest_Activity.this,Multiplayer.class));
+        finish();
+    }
+    @Override
+    protected void onUserLeaveHint() {
+        super.onUserLeaveHint();
+
+
+        if(a==1){
+
+        }
+        else if(New_Game.media.isPlaying()){
+            New_Game.media.stop();
+            b=1;
+        }
+
+        else if (About_us.medi.isPlaying()) {
+            About_us.medi.stop();
+            b=1;
+        }
+
+
+
+
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        if(b==1){
+            New_Game.media = MediaPlayer.create(RoomRequest_Activity.this, R.raw.safe);
+            New_Game.media.start();
+            New_Game.media.setLooping(true);
+            b=0;
+        }
+
+    }
 
 }

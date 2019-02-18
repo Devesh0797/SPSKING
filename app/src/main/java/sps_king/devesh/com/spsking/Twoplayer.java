@@ -2,6 +2,7 @@ package sps_king.devesh.com.spsking;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -21,7 +22,7 @@ public class Twoplayer extends Activity {
     //public static int flag_time=0;
     ImageView iv_user1,iv_user2;
     Button user1,user2;
-    //TextView tv_time;
+    private int a=0,b=0;
     // private static int i = 10;
     protected static int flag_user1=0,flag_user2=0;
     private TextView user;
@@ -218,6 +219,7 @@ public class Twoplayer extends Activity {
         if(flag_user1==1 && flag_user2==1) {
 
             Gameoptions.no=Gameoptions.no+1;
+            a=1;
             Intent intent = new Intent(this, TwoUserResult.class);
             startActivity(intent);
             this.finish();
@@ -258,8 +260,7 @@ public class Twoplayer extends Activity {
         if (backPressedTime + 2000 > System.currentTimeMillis()){
             backToast.cancel();
             super.onBackPressed();
-
-            //  flag_time=0;
+            a=1;
             finish();
             return;
 
@@ -268,5 +269,36 @@ public class Twoplayer extends Activity {
             backToast.show();
         }
         backPressedTime = System.currentTimeMillis();
+    }
+    @Override
+    protected void onUserLeaveHint() {
+        super.onUserLeaveHint();
+
+
+        if(a==1){
+
+        }
+        else if(New_Game.media.isPlaying()){
+            New_Game.media.stop();
+        }
+
+        else if (About_us.medi.isPlaying()) {
+            About_us.medi.stop();
+        }
+        b = 1;
+
+
+
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        if(b==1){
+            New_Game.media = MediaPlayer.create(Twoplayer.this, R.raw.safe);
+            New_Game.media.start();
+            New_Game.media.setLooping(true);
+            b=0;
+        }
+
     }
 }

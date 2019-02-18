@@ -1,5 +1,7 @@
 package sps_king.devesh.com.spsking;
 
+import android.content.Intent;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,6 +26,8 @@ public class Userlist_Activity extends AppCompatActivity {
     private DatabaseReference mDatabaseRef;
     private List<UserDatabase> mUploads;
     private ProgressBar mProgressCircle;
+    private int a=0,b=0;
+    public static int a1=0;
 
 
     @Override
@@ -78,8 +82,49 @@ public class Userlist_Activity extends AppCompatActivity {
 
 
     }
+    @Override
+    public void onBackPressed() {
+        a=1;
+        finish();
+        startActivity(new Intent(Userlist_Activity.this,RoundActivity.class));
+    }
+
+    @Override
+    protected void onUserLeaveHint() {
+        super.onUserLeaveHint();
 
 
+        if(a==1){
+
+        }
+        else if(a1==1){
+
+        }
+        else if(New_Game.media.isPlaying()){
+            New_Game.media.stop();
+            b=1;
+        }
+
+        else if (About_us.medi.isPlaying()) {
+            About_us.medi.stop();
+            b=1;
+        }
+
+
+
+
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        if(b==1){
+            New_Game.media = MediaPlayer.create(Userlist_Activity.this, R.raw.safe);
+            New_Game.media.start();
+            New_Game.media.setLooping(true);
+            b=0;
+        }
+
+    }
 
 
 }

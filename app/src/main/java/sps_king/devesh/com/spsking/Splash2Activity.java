@@ -48,7 +48,7 @@ public class Splash2Activity extends Activity {
     private void next(){
         if(x==0){
 
-            img.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.zeroth));
+           // img.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.zeroth));
             x++;
         }
         else if(x==1){

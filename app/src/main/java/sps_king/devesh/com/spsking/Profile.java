@@ -90,7 +90,7 @@ public class Profile extends Activity {
 
                 if(haveNetwork()) {
 
-                    if (!TextUtils.isEmpty(Name)) {
+                    if (!TextUtils.isEmpty(Name) && !TextUtils.isEmpty(age)) {
 
                         if (mUploadTask != null && mUploadTask.isInProgress()) {
                             Toast.makeText(Profile.this, "Upload in progress", Toast.LENGTH_SHORT).show();
@@ -100,6 +100,7 @@ public class Profile extends Activity {
                             demoRef.child("Multiplayer").setValue("Offline");
                             UserDatabase artist= new UserDatabase(Name,currentUser,age);
                             mDataBase.setValue(artist);
+                            choose.setEnabled(false);
 
                             uploadFile();
                         }

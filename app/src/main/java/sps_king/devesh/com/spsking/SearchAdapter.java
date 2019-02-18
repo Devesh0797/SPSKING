@@ -97,7 +97,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ImageViewH
                     FriendsDatabase workersdatabase1 = postSnapshot.getValue(FriendsDatabase.class);
                     String id=workersdatabase1.getName();
                     if(workersdatabase.getUserID().equals(workersdatabase1.getName())){
-                        holder.request.setText("Cancel Request");
+                        holder.request.setText("Request Sent");
                         holder.request.setEnabled(false);
                     }
 
@@ -137,7 +137,9 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ImageViewH
 
                 holder.request.setText("Cancel Request");
                     send(workersdatabase.getUserID(),"WELCOME TO MY APP");
+                Intent intent = new Intent(mContext, Multiplayer.class);
                     ((Search_Activity)mContext).finish();
+                mContext.startActivity(intent);
 
 
 

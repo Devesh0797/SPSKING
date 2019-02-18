@@ -13,6 +13,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.MediaController;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import java.io.IOException;
@@ -89,6 +90,12 @@ public class About_us extends AppCompatActivity {
        // vid.start();
 
     }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        if(medi!=null)
+          medi=null;
+        }
 
 
 }

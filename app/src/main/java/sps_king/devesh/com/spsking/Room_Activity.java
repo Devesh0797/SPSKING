@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,13 +33,14 @@ public class Room_Activity extends Activity {
     private DatabaseReference rootRef, demoRef;
     private DatabaseReference rootRef1, demoRef1,mdata;
     private Handler handler = new Handler();
-    private ImageButton b1,b2,b3;
+    private ImageView b1,b2,b3;
     private int Round=1;
     private int x=0;
     private int y=0;
     private int z=0;
     public static String player;
     public String fg;
+    private int a=0,b=0;
 
     private RecyclerView mRecyclerView;
     private ResultAdapter mAdapter;
@@ -60,9 +63,14 @@ public class Room_Activity extends Activity {
         setContentView(R.layout.activity_room_);
 
 
-        b1=(ImageButton) findViewById(R.id.btn_12);
-        b2=(ImageButton) findViewById(R.id.btn_23);
-        b3=(ImageButton) findViewById(R.id.btn_34);
+
+        b1 = (ImageView) findViewById(R.id.rock);
+        b2 = (ImageView) findViewById(R.id.paper);
+        b3 = (ImageView) findViewById(R.id.scissor);
+
+        b1.setImageResource(R.drawable.hand);
+        b2.setImageResource(R.drawable.hand1);
+        b3.setImageResource(R.drawable.hand2);
 
         t1=(TextView)findViewById(R.id.tv_wincr);
         t2=(TextView)findViewById(R.id.tv_loosecr);
@@ -1356,12 +1364,13 @@ public class Room_Activity extends Activity {
 
                     try{
                         mdata = FirebaseDatabase.getInstance().getReference("Multiplayer").child(fg).child("Score");
-
+                        a=1;
                         mdata.removeValue();
                         startActivity(new Intent(Room_Activity.this,New_Game.class));
                         finish();
                     }
                     catch (Exception e){
+                        a=1;
                         startActivity(new Intent(Room_Activity.this,New_Game.class));
                         finish();
                     }
@@ -1411,7 +1420,39 @@ public class Room_Activity extends Activity {
         }
     }
 
+    @Override
+    protected void onUserLeaveHint() {
+        super.onUserLeaveHint();
 
+
+        if(a==1){
+
+        }
+        else if(New_Game.media.isPlaying()){
+            New_Game.media.stop();
+            b=1;
+        }
+
+        else if (About_us.medi.isPlaying()) {
+            About_us.medi.stop();
+            b=1;
+        }
+
+
+
+
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        if(b==1){
+            New_Game.media = MediaPlayer.create(Room_Activity.this, R.raw.safe);
+            New_Game.media.start();
+            New_Game.media.setLooping(true);
+            b=0;
+        }
+
+    }
 
 
 

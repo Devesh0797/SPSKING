@@ -9,6 +9,7 @@ import android.os.Bundle;
 
 public class SplashActivity extends Activity {
     private static int SPLASH_TIME_OUT = 3000;
+    public static MediaPlayer m1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +19,9 @@ public class SplashActivity extends Activity {
         MediaPlayer med;
         med = MediaPlayer.create(SplashActivity.this, R.raw.door);
         med.start();
+
+        m1=MediaPlayer.create(SplashActivity.this,R.raw.intro);
+        m1.start();
 
         new Handler().postDelayed(new Runnable() {
             @Override

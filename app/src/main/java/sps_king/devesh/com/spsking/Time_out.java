@@ -3,6 +3,7 @@ package sps_king.devesh.com.spsking;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
@@ -30,6 +31,7 @@ public class Time_out extends Activity {
     Random r;
     ProgressDialog progressDialog;
     public static int Player1score=0,Player2score =0 ;
+    private int a=0,b=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +114,7 @@ public class Time_out extends Activity {
         if (Gameoptions.no == Gameoptions.round) {
 
             Intent intent = new Intent(this, Final2UserResult.class);
+            a=1;
             startActivity(intent);
             this.finish();
         } else {
@@ -130,6 +133,7 @@ public class Time_out extends Activity {
 
 
             }
+            a=1;
             Intent intent = new Intent(this, Twoplayer.class);
             startActivity(intent);
             finish();
@@ -140,6 +144,7 @@ public class Time_out extends Activity {
         if (backPressedTime + 2000 > System.currentTimeMillis()){
             backToast.cancel();
             super.onBackPressed();
+            a=1;
             Intent intent = new Intent(this, New_Game.class);
             startActivity(intent);
             this.finish();
@@ -150,5 +155,36 @@ public class Time_out extends Activity {
             backToast.show();
         }
         backPressedTime = System.currentTimeMillis();
+    }
+    @Override
+    protected void onUserLeaveHint() {
+        super.onUserLeaveHint();
+
+
+        if(a==1){
+
+        }
+        else if(New_Game.media.isPlaying()){
+            New_Game.media.stop();
+        }
+
+        else if (About_us.medi.isPlaying()) {
+            About_us.medi.stop();
+        }
+        b = 1;
+
+
+
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        if(b==1){
+            New_Game.media = MediaPlayer.create(Time_out.this, R.raw.safe);
+            New_Game.media.start();
+            New_Game.media.setLooping(true);
+            b=0;
+        }
+
     }
 }

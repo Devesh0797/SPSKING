@@ -56,6 +56,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ImageViewHolde
                     Toast.makeText(mContext, "You clicked " + workersdatabase.getName(), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(mContext, Room_Activity.class);
                     New_Game.player="player1";
+                    Userlist_Activity.a1=1;
                     intent.putExtra("userID", workersdatabase.getUserID());
                     mContext.startActivity(intent);
                 }

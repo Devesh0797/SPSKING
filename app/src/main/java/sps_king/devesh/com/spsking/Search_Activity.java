@@ -1,6 +1,8 @@
 package sps_king.devesh.com.spsking;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.media.MediaPlayer;
 import android.media.effect.Effect;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,6 +32,7 @@ public class Search_Activity extends Activity {
     private DatabaseReference mDatabaseRef;
     private List<UserDatabase> mUploads;
     private ProgressBar mProgressCircle;
+    private int a=0,b=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,10 +102,40 @@ public class Search_Activity extends Activity {
                 });
             }
         });
+    }
+    @Override
+    public void onBackPressed(){
+        a=1;
+        finish();
+        startActivity(new Intent(Search_Activity.this,Multiplayer.class));
+    }
+    @Override
+    protected void onUserLeaveHint() {
+        super.onUserLeaveHint();
 
 
+        if(a==1){
 
+        }
+        else if(New_Game.media.isPlaying()){
+            New_Game.media.stop();
+            b=1;
+        }
 
+        else if (About_us.medi.isPlaying()) {
+            About_us.medi.stop();
+            b=1;
+        }
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        if(b==1){
+            New_Game.media = MediaPlayer.create(Search_Activity.this, R.raw.safe);
+            New_Game.media.start();
+            New_Game.media.setLooping(true);
+            b=0;
+        }
 
     }
 }

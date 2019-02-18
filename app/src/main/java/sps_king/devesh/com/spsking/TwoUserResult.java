@@ -2,6 +2,7 @@ package sps_king.devesh.com.spsking;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,7 +17,7 @@ public class TwoUserResult extends Activity {
     private long backPressedTime;
     private Toast backToast;
     TextView tv_result_user1,tv_result_user2;
-
+    private int a=0,b=0;
     public static String Player1,Player2;
     Button Return,mai;
     ImageView Imageresult_rot_user,Imageresult_rot_opp,Imageresult_user,Imageresult_opp;
@@ -139,6 +140,7 @@ public class TwoUserResult extends Activity {
         mai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                a=1;
                 startActivity(new Intent(TwoUserResult.this,New_Game.class));
                 finish();
             }
@@ -150,7 +152,7 @@ public class TwoUserResult extends Activity {
             if(Gameoptions.no==Gameoptions.round){
                 Twoplayer.flag_user1=0;
                 Twoplayer.flag_user2=0;
-
+                a=1;
                 Intent intent = new Intent(this,Final2UserResult.class);
                 startActivity(intent);
                 this.finish();
@@ -158,7 +160,7 @@ public class TwoUserResult extends Activity {
             else {
                 Twoplayer.flag_user1 = 0;
                 Twoplayer.flag_user2 = 0;
-
+                a=1;
                 Intent intent = new Intent(this, Twoplayer.class);
                 startActivity(intent);
                 this.finish();
@@ -167,7 +169,7 @@ public class TwoUserResult extends Activity {
         else {
             Twoplayer.flag_user1 = 0;
             Twoplayer.flag_user2 = 0;
-
+            a=1;
             Intent intent = new Intent(this, Time_out.class);
             startActivity(intent);
             this.finish();
@@ -179,6 +181,7 @@ public class TwoUserResult extends Activity {
         if (backPressedTime + 2000 > System.currentTimeMillis()){
             backToast.cancel();
             super.onBackPressed();
+            a=1;
             finish();
             Intent intent = new Intent(this, New_Game.class);
             startActivity(intent);
@@ -189,5 +192,36 @@ public class TwoUserResult extends Activity {
             backToast.show();
         }
         backPressedTime = System.currentTimeMillis();
+    }
+    @Override
+    protected void onUserLeaveHint() {
+        super.onUserLeaveHint();
+
+
+        if(a==1){
+
+        }
+        else if(New_Game.media.isPlaying()){
+            New_Game.media.stop();
+        }
+
+        else if (About_us.medi.isPlaying()) {
+            About_us.medi.stop();
+        }
+        b = 1;
+
+
+
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        if(b==1){
+            New_Game.media = MediaPlayer.create(TwoUserResult.this, R.raw.safe);
+            New_Game.media.start();
+            New_Game.media.setLooping(true);
+            b=0;
+        }
+
     }
 }

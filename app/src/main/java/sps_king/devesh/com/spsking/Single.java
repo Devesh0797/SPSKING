@@ -22,6 +22,7 @@ public class Single extends Activity {
     private static TextView tv_CPU,tv_user,tv_round,cpu;
     int n=0;
     private TextView user;
+    private int a=0,b=0;
 
 
     String mychoice, cpuchoice, result;
@@ -113,6 +114,7 @@ public class Single extends Activity {
 
     public void next(){
         this.finishActivity(1);
+        a=1;
         Intent intent = new Intent(this, result.class);
         startActivity(intent);
         finish();
@@ -121,6 +123,7 @@ public class Single extends Activity {
     public void onBackPressed(){
         if (backPressedTime + 2000 > System.currentTimeMillis()){
             backToast.cancel();
+            a=1;
             super.onBackPressed();
             Intent intent = new Intent(this, New_Game.class);
             startActivity(intent);
@@ -193,6 +196,37 @@ public class Single extends Activity {
             Toast.makeText(Single.this, result, Toast.LENGTH_SHORT).show();
             handler.postDelayed(mToastRunnable,4000);
 
+        }
+
+    }
+    @Override
+    protected void onUserLeaveHint() {
+        super.onUserLeaveHint();
+
+
+        if(a==1){
+
+        }
+        else if(New_Game.media.isPlaying()){
+            New_Game.media.stop();
+        }
+
+        else if (About_us.medi.isPlaying()) {
+            About_us.medi.stop();
+        }
+        b = 1;
+
+
+
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        if(b==1){
+            New_Game.media = MediaPlayer.create(Single.this, R.raw.safe);
+            New_Game.media.start();
+            New_Game.media.setLooping(true);
+            b=0;
         }
 
     }

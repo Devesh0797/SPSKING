@@ -40,8 +40,6 @@ public class RegisterActivity extends Activity {
 
         auth = FirebaseAuth.getInstance();
 
-        final FirebaseUser User = FirebaseAuth.getInstance().getCurrentUser();
-
         progressDialog= new ProgressDialog(RegisterActivity.this);
         progressDialog.setTitle("Register");
         progressDialog.setMessage("Creating Your Account And Logging You In");

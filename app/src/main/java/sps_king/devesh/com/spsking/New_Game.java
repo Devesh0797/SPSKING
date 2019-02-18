@@ -27,7 +27,7 @@ import com.squareup.picasso.Picasso;
 
 public class New_Game extends Activity {
 
-    Button profile, newgame,resume1,aboutus;
+    private Button profile, newgame,resume1,aboutus;
     private DatabaseReference rootRef,demoRef;
     private FirebaseAuth firebaseAuth;
     ProgressDialog progressDialog;
@@ -38,9 +38,10 @@ public class New_Game extends Activity {
     private int fl=0;
     public static String imageurl,USerAge,player;
 
-
+    private int a=0;
+    private int b=0;
     public static MediaPlayer media;
-
+    private int v=0;
 
 
     @Override
@@ -53,29 +54,8 @@ public class New_Game extends Activity {
         newgame = (Button) findViewById(R.id.new_game);
         resume1=(Button)findViewById(R.id.rees);
         aboutus=(Button)findViewById(R.id.about_button);
-        b1=(Button)findViewById(R.id.button2);
+        b1=(Button)findViewById(R.id.btn_mulonl);
        // t1=(TextView)findViewById(R.id.tv_check);
-
-
-
-        if(media==null) {
-            media = MediaPlayer.create(New_Game.this, R.raw.safe);
-            if (!media.isPlaying()) {
-                media.start();
-                media.setLooping(true);
-            }
-        }
-
-
-
-
-
-        b1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(New_Game.this,Multiplayer.class));
-            }
-        });
 
 
 
@@ -83,7 +63,6 @@ public class New_Game extends Activity {
 
 
             firebaseAuth = FirebaseAuth.getInstance();
-            final FirebaseUser User = FirebaseAuth.getInstance().getCurrentUser();
             rootRef = FirebaseDatabase.getInstance().getReference();
 
             progressDialog = new ProgressDialog(New_Game.this);
@@ -95,21 +74,16 @@ public class New_Game extends Activity {
             progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.setCancelable(false);
 
-
-            //  authListener = new FirebaseAuth.AuthStateListener() {
-
-            // @Override
-            //  public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
             FirebaseUser user = firebaseAuth.getCurrentUser();
             if (user == null) {
                 progressDialog.dismiss();
-
+                a=1;
                 startActivity(new Intent(New_Game.this, RegisterActivity.class));
                 finish();
-                // user auth state is changed - user is null
-                // launch login activity
 
-            } else {
+            }
+
+            else {
                 String currentUser = firebaseAuth.getCurrentUser().getUid();
                 USerID=currentUser;
                 demoRef = rootRef.child("Users").child(currentUser);
@@ -118,12 +92,18 @@ public class New_Game extends Activity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         final String value = dataSnapshot.getValue(String.class);
-                        //Log.d(TAG,"Value is"+ value);
-                        //Toast.makeText(Details.this,"value is"+value,Toast.LENGTH_SHORT).show();
-
 
                         if (value != null) {
                             Toast.makeText(New_Game.this, "All Perfect", Toast.LENGTH_SHORT).show();
+                            if(v==0) {
+                                if (media == null) {
+                                    media = MediaPlayer.create(New_Game.this, R.raw.safe);
+                                    if (!media.isPlaying()) {
+                                        media.start();
+                                        media.setLooping(true);
+                                    }
+                                }
+                            }
                             fl=0;
                             Username = value;
                             progressDialog.dismiss();
@@ -133,10 +113,6 @@ public class New_Game extends Activity {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     USerAge = dataSnapshot.getValue(String.class);
-                                    //Log.d(TAG,"Value is"+ value);
-                                    //Toast.makeText(Details.this,"value is"+value,Toast.LENGTH_SHORT).show();
-
-
 
                                 }
                                 @Override
@@ -148,15 +124,15 @@ public class New_Game extends Activity {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     imageurl = dataSnapshot.getValue(String.class);
-                                    //Log.d(TAG,"Value is"+ value);
-                                    //Toast.makeText(Details.this,"value is"+value,Toast.LENGTH_SHORT).show();
-
                                 }
                                 @Override
                                 public void onCancelled(DatabaseError databaseError) {
                                     Toast.makeText(New_Game.this,"Check your Internet Connection",Toast.LENGTH_SHORT).show();
                                 }
                             });
+
+
+
 
 
                             //   Thread t=new Thread(){
@@ -232,18 +208,13 @@ public class New_Game extends Activity {
                             //       if(value1==){
                             //         t.stop();
                             //   }
-
-
-
-
-
-
-
                         }
                         else {
+                            a=1;
+                            progressDialog.dismiss();
                             startActivity(new Intent(New_Game.this, Profile.class));
                             finish();
-                            progressDialog.dismiss();
+
                         }
                     }
 
@@ -259,6 +230,7 @@ public class New_Game extends Activity {
             profile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    a=1;
                     startActivity(new Intent(New_Game.this, DetailsActivity.class));
                 }
             });
@@ -266,12 +238,14 @@ public class New_Game extends Activity {
             newgame.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    a=1;
                     startActivity(new Intent(New_Game.this, Gameoptions.class));
                 }
             });
             aboutus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    a=1;
                     startActivity(new Intent(New_Game.this,About_us.class));
                     finish();
                 }
@@ -279,11 +253,19 @@ public class New_Game extends Activity {
             resume1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    a=1;
                     startActivity(new Intent(New_Game.this,Rules.class));
                     finish();
                 }
             });
 
+            b1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    a=1;
+                    startActivity(new Intent(New_Game.this,Multiplayer.class));
+                }
+            });
 
 
 
@@ -369,6 +351,38 @@ public class New_Game extends Activity {
     public void onStart() {
         super.onStart();
 
+
+    }
+    @Override
+    protected void onUserLeaveHint() {
+        super.onUserLeaveHint();
+        if(a==1){
+            a=0;
+        }
+        else if(fl==1){
+            v=1;
+        }
+        else{
+            if(media.isPlaying()) {
+                media.stop();
+            }
+            else if(About_us.medi.isPlaying()){
+                About_us.medi.stop();
+            }
+            b=1;
+        }
+
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        if(b==1){
+            Toast.makeText(New_Game.this, "Check your Internet Connection", Toast.LENGTH_SHORT).show();
+            media = MediaPlayer.create(New_Game.this, R.raw.safe);
+            media.start();
+            media.setLooping(true);
+            b=0;
+        }
 
     }
 }

@@ -1,6 +1,8 @@
 package sps_king.devesh.com.spsking;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,6 +27,7 @@ public class Friend_requestActivity extends AppCompatActivity {
     private DatabaseReference mDatabaseRef;
     private List<UserDatabase> mUploads;
     private ProgressBar mProgressCircle;
+    private int a=0,b=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,32 +57,56 @@ public class Friend_requestActivity extends AppCompatActivity {
                     mUploads.add(workersdatabase);
 
                 }
-
-
                 mAdapter = new RequestAdapter(Friend_requestActivity.this, mUploads);
-
                 mRecyclerView.setAdapter(mAdapter);
-              //  mProgressCircle.setVisibility(View.INVISIBLE);
-
-
-
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Toast.makeText(Friend_requestActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                 mProgressCircle.setVisibility(View.INVISIBLE);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        a=1;
+        finish();
+        startActivity(new Intent(Friend_requestActivity.this,Multiplayer.class));
+    }
+
+    @Override
+    protected void onUserLeaveHint() {
+        super.onUserLeaveHint();
 
 
+        if(a==1){
 
+        }
+        else if(New_Game.media.isPlaying()){
+            New_Game.media.stop();
+            b=1;
+        }
+
+        else if (About_us.medi.isPlaying()) {
+            About_us.medi.stop();
+            b=1;
+        }
 
 
 
 
     }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        if(b==1){
+            New_Game.media = MediaPlayer.create(Friend_requestActivity.this, R.raw.safe);
+            New_Game.media.start();
+            New_Game.media.setLooping(true);
+            b=0;
+        }
 
-
+    }
 
 }

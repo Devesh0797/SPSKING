@@ -3,6 +3,7 @@ package sps_king.devesh.com.spsking;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v4.widget.CircularProgressDrawable;
@@ -26,6 +27,8 @@ import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
+
 public class DetailsActivity extends Activity {
 
     private TextView name,age;
@@ -37,6 +40,8 @@ public class DetailsActivity extends Activity {
     private StorageReference mStorageRef;
     ProgressDialog progressDialog;
     private ProgressBar pro;
+    private int b=0;
+    private int a=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +83,7 @@ public class DetailsActivity extends Activity {
                         name.setText(value);
 
                     } else {
+                        a=1;
                         startActivity(new Intent(DetailsActivity.this, Profile.class));
                         finish();
                         pro.setVisibility(View.GONE);
@@ -135,11 +141,17 @@ public class DetailsActivity extends Activity {
 
                             @Override
                             public void onError() {
+
                             }
                         });
                         progressDialog.dismiss();
 
 
+
+                    }
+                    else{
+                        startActivity(new Intent(DetailsActivity.this,Profile.class));
+                        finish();
                     }
                 }
                 else{
@@ -157,8 +169,9 @@ public class DetailsActivity extends Activity {
             @Override
             public void onClick(View v) {
                 firebaseAuth.signOut();
+                startActivity(new Intent(DetailsActivity.this,RegisterActivity.class));
                 finish();
-                startActivity(new Intent(DetailsActivity.this,New_Game.class));
+
             }
         });
     }
@@ -183,9 +196,40 @@ public class DetailsActivity extends Activity {
     @Override
     public void onBackPressed(){
         startActivity(new Intent(DetailsActivity.this,New_Game.class));
+        a=1;
         finish();
     }
 
+    @Override
+    protected void onUserLeaveHint() {
+        super.onUserLeaveHint();
 
+
+        if(a==1){
+
+        }
+           else if(New_Game.media.isPlaying()){
+                New_Game.media.stop();
+            }
+
+            else if (About_us.medi.isPlaying()) {
+                About_us.medi.stop();
+            }
+            b = 1;
+
+
+
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        if(b==1){
+            New_Game.media = MediaPlayer.create(DetailsActivity.this, R.raw.safe);
+            New_Game.media.start();
+            New_Game.media.setLooping(true);
+            b=0;
+        }
+
+    }
 
 }

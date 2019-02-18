@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +30,7 @@ public class Room2Activity extends Activity {
 
     private DatabaseReference rootRef1, demoRef1, mdata;
     private Handler handler = new Handler();
-    private Button b1, b2, b3;
+    private ImageView b1, b2, b3;
     private int Round = 1;
     private int x = 0;
     private int y = 0;
@@ -37,6 +39,7 @@ public class Room2Activity extends Activity {
     public static String player;
     private String v;
     private TextView d1, d2;
+    private int a1=0,b=0;
 
     ProgressDialog progressDialog;
     ProgressDialog progressDialog1;
@@ -57,9 +60,13 @@ public class Room2Activity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room2);
 
-        b1 = (Button) findViewById(R.id.bt_zx);
-        b2 = (Button) findViewById(R.id.bt_xc);
-        b3 = (Button) findViewById(R.id.bt_cv);
+        b1 = (ImageView) findViewById(R.id.rock);
+        b2 = (ImageView) findViewById(R.id.paper);
+        b3 = (ImageView) findViewById(R.id.scissor);
+
+        b1.setImageResource(R.drawable.hand);
+        b2.setImageResource(R.drawable.hand1);
+        b3.setImageResource(R.drawable.hand2);
 
         t1 = (TextView) findViewById(R.id.tv_wincv);
         t2 = (TextView) findViewById(R.id.tv_loosecv);
@@ -70,8 +77,8 @@ public class Room2Activity extends Activity {
         player = "player2";
 
         progressDialog = new ProgressDialog(Room2Activity.this);
-        progressDialog.setTitle("Register");
-        progressDialog.setMessage("Creating Your Account And Logging You In");
+        progressDialog.setTitle("Analyse");
+        progressDialog.setMessage("Wait");
 
         progressDialog2 = new ProgressDialog(Room2Activity.this);
         progressDialog2.setTitle("Waiting");
@@ -1674,9 +1681,11 @@ public class Room2Activity extends Activity {
                 try {
                     mdata = FirebaseDatabase.getInstance().getReference("Multiplayer").child(game).child("Score");
                     mdata.removeValue();
+                    a1=1;
                     startActivity(new Intent(Room2Activity.this, New_Game.class));
                     finish();
                 } catch (Exception e) {
+                    a1=1;
                     startActivity(new Intent(Room2Activity.this, New_Game.class));
                     finish();
                 }
@@ -1691,6 +1700,39 @@ public class Room2Activity extends Activity {
         });
         alert.show();
 
+
+    }
+    @Override
+    protected void onUserLeaveHint() {
+        super.onUserLeaveHint();
+
+
+        if(a1==1){
+
+        }
+        else if(New_Game.media.isPlaying()){
+            New_Game.media.stop();
+            b=1;
+        }
+
+        else if (About_us.medi.isPlaying()) {
+            About_us.medi.stop();
+            b=1;
+        }
+
+
+
+
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        if(b==1){
+            New_Game.media = MediaPlayer.create(Room2Activity.this, R.raw.safe);
+            New_Game.media.start();
+            New_Game.media.setLooping(true);
+            b=0;
+        }
 
     }
 }
