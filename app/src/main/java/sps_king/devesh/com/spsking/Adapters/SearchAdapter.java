@@ -1,8 +1,7 @@
-package sps_king.devesh.com.spsking;
+package sps_king.devesh.com.spsking.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -28,8 +27,14 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
+
+import sps_king.devesh.com.spsking.Models.FriendsDatabase;
+import sps_king.devesh.com.spsking.Multiplayer;
+import sps_king.devesh.com.spsking.New_Game;
+import sps_king.devesh.com.spsking.R;
+import sps_king.devesh.com.spsking.Search_Activity;
+import sps_king.devesh.com.spsking.Models.UserDatabase;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ImageViewHolder> {
 
@@ -67,7 +72,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ImageViewH
 
 
         mDatabaseRef=FirebaseDatabase.getInstance().getReference("Users").child(New_Game.USerID);
-        mDatabaseRef1=FirebaseDatabase.getInstance().getReference("Users").child(New_Game.USerID);
+        //mDatabaseRef1=FirebaseDatabase.getInstance().getReference("Users").child(New_Game.USerID);
 
         mDatabaseRef.child("FriendList").addValueEventListener(new ValueEventListener() {
             @Override

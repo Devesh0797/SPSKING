@@ -1,4 +1,4 @@
-package sps_king.devesh.com.spsking;
+package sps_king.devesh.com.spsking.Models;
 
 public class Upload {
     private String mName;

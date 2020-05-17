@@ -1,6 +1,5 @@
 package sps_king.devesh.com.spsking;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +18,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import sps_king.devesh.com.spsking.Adapters.RequestAdapter;
+import sps_king.devesh.com.spsking.Models.UserDatabase;
 
 public class Friend_requestActivity extends AppCompatActivity {
 

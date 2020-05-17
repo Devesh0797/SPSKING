@@ -1,23 +1,16 @@
 package sps_king.devesh.com.spsking;
 
 import android.content.Intent;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
-import android.view.View;
-import android.widget.Button;
 import android.widget.MediaController;
-import android.widget.Toast;
-import android.widget.VideoView;
 
-import java.io.IOException;
 import java.util.Vector;
+
+import sps_king.devesh.com.spsking.Adapters.VideoAdapter;
 
 public class About_us extends AppCompatActivity {
   //  VideoView vid;

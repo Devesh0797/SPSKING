@@ -11,7 +11,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class result extends Activity {
-
     private static TextView  tv_result;
     Button Mn;
     private int a=0,b=0;

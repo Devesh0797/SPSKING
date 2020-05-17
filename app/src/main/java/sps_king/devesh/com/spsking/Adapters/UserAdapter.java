@@ -1,4 +1,4 @@
-package sps_king.devesh.com.spsking;
+package sps_king.devesh.com.spsking.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +16,12 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import sps_king.devesh.com.spsking.New_Game;
+import sps_king.devesh.com.spsking.R;
+import sps_king.devesh.com.spsking.Room_Activity;
+import sps_king.devesh.com.spsking.Models.UserDatabase;
+import sps_king.devesh.com.spsking.Userlist_Activity;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ImageViewHolder> {
 

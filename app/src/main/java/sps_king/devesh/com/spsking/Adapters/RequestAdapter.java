@@ -1,11 +1,9 @@
-package sps_king.devesh.com.spsking;
+package sps_king.devesh.com.spsking.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.nfc.Tag;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,16 +11,18 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import sps_king.devesh.com.spsking.Friend_requestActivity;
+import sps_king.devesh.com.spsking.New_Game;
+import sps_king.devesh.com.spsking.R;
+import sps_king.devesh.com.spsking.Room_Activity;
+import sps_king.devesh.com.spsking.Models.UserDatabase;
 
 public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ImageViewHolder> {
     private Context mContext;
@@ -136,7 +136,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ImageVie
             relativeLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    itemView.getContext().startActivity(new Intent(itemView.getContext(),Room_Activity.class));
+                    itemView.getContext().startActivity(new Intent(itemView.getContext(), Room_Activity.class));
                 }
             });
 

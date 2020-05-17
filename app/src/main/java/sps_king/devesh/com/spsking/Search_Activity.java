@@ -3,8 +3,6 @@ package sps_king.devesh.com.spsking;
 import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
-import android.media.effect.Effect;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,6 +21,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import sps_king.devesh.com.spsking.Adapters.SearchAdapter;
+import sps_king.devesh.com.spsking.Models.UserDatabase;
 
 public class Search_Activity extends Activity {
     private EditText e1;
@@ -73,23 +74,14 @@ public class Search_Activity extends Activity {
                             }
                             else {
                                 String a = workersdatabase.getName().toLowerCase();
-                                if(a.equals(pin)) {
+                                if(a.equalsIgnoreCase(pin)) {
                                     mUploads.add(workersdatabase);
                                 }
                             }
-
                         }
-
-
-
-
                         mAdapter = new SearchAdapter(Search_Activity.this, mUploads);
-
                         mRecyclerView.setAdapter(mAdapter);
                         mProgressCircle.setVisibility(View.INVISIBLE);
-
-
-
                     }
 
                     @Override

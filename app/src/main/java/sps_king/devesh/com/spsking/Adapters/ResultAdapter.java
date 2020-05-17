@@ -1,17 +1,18 @@
-package sps_king.devesh.com.spsking;
+package sps_king.devesh.com.spsking.Adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
+
+import sps_king.devesh.com.spsking.New_Game;
+import sps_king.devesh.com.spsking.R;
+import sps_king.devesh.com.spsking.Models.ResultDatabase;
 
 public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ImageViewHolder> {
 

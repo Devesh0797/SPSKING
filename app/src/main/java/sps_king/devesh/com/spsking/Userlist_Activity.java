@@ -19,6 +19,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import sps_king.devesh.com.spsking.Adapters.UserAdapter;
+import sps_king.devesh.com.spsking.Models.UserDatabase;
+
 public class Userlist_Activity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;

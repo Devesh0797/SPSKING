@@ -1,4 +1,4 @@
-package sps_king.devesh.com.spsking;
+package sps_king.devesh.com.spsking.Adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,6 +8,9 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 
 import java.util.List;
+
+import sps_king.devesh.com.spsking.R;
+import sps_king.devesh.com.spsking.YouTubeVideos;
 
 public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoViewHolder>{
 
