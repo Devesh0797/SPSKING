@@ -47,12 +47,13 @@ public class Search_Activity extends Activity {
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(Search_Activity.this));
 
-        // mProgressCircle = rootView.findViewById(R.id.pro);
 
         mUploads = new ArrayList<>();
         mProgressCircle = (ProgressBar) findViewById(R.id.pro_search);
 
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("Users");
+
+        showusers();
 
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,8 +62,7 @@ public class Search_Activity extends Activity {
                 mProgressCircle.setVisibility(View.VISIBLE);
 
                 Query query = mDatabaseRef.orderByChild("name").equalTo(pin);
-
-
+                mUploads.clear();
                 query.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -74,7 +74,7 @@ public class Search_Activity extends Activity {
                             }
                             else {
                                 String a = workersdatabase.getName().toLowerCase();
-                                if(a.equalsIgnoreCase(pin)) {
+                                if(a.equals(pin)) {
                                     mUploads.add(workersdatabase);
                                 }
                             }
@@ -95,6 +95,37 @@ public class Search_Activity extends Activity {
             }
         });
     }
+
+    public void showusers(){
+        DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference("Users");
+        mDatabaseRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                mUploads.clear();
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    UserDatabase workersdatabase = postSnapshot.getValue(UserDatabase.class);
+
+                    if (workersdatabase.getUserID().equals(New_Game.USerID)) {
+
+                    }
+                    else {
+                            mUploads.add(workersdatabase);
+                    }
+                }
+                mAdapter = new SearchAdapter(Search_Activity.this, mUploads);
+                mRecyclerView.setAdapter(mAdapter);
+                mProgressCircle.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(Search_Activity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                mProgressCircle.setVisibility(View.INVISIBLE);
+            }
+        });
+    }
+
+
     @Override
     public void onBackPressed(){
         a=1;

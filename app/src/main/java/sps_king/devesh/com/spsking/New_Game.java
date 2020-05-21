@@ -31,7 +31,6 @@ public class New_Game extends Activity {
     private DatabaseReference rootRef,demoRef;
     private FirebaseAuth firebaseAuth;
     ProgressDialog progressDialog;
-    private FirebaseAuth.AuthStateListener authListener;
     public static String Username;
     public static String USerID;
     private Button b1;

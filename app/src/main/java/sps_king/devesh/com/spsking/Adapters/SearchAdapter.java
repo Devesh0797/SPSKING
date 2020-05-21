@@ -72,7 +72,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ImageViewH
 
 
         mDatabaseRef=FirebaseDatabase.getInstance().getReference("Users").child(New_Game.USerID);
-        //mDatabaseRef1=FirebaseDatabase.getInstance().getReference("Users").child(New_Game.USerID);
+        mDatabaseRef1=FirebaseDatabase.getInstance().getReference("Users").child(New_Game.USerID);
 
         mDatabaseRef.child("FriendList").addValueEventListener(new ValueEventListener() {
             @Override
